@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitación Baby Shark</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to bottom, #00c6ff, #0072ff);
+      overflow: hidden;
+    }
+
+    /* Fondo animado con burbujas */
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 50%;
+      animation: rise 10s infinite ease-in;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-1200px) scale(1.5); opacity: 0; }
+    }
+
+    .card {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(to bottom, #ffeb3b, #ffffff); /* Amarillo arriba → blanco abajo */
+      border-radius: 20px;
+      box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+      padding: 30px;
+      max-width: 600px;
+      margin: 50px auto;
+      text-align: center;
+    }
+
+    h1 {
+      color: #ff1493;
+      font-size: 2.5em;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      background: #ff4081;
+      color: blue;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #e91e63;
+    }
+
+    /* Animación de Baby Shark nadando */
+    .shark {
+      position: absolute;
+      width: 150px;
+      animation: swim 20s linear infinite;
+    }
+
+    .shark1 { top: 60%; left: -200px; animation-delay: 0s; }
+    .shark2 { top: 30%; left: -250px; animation-delay: 5s; }
+    .shark3 { top: 70%; left: -220px; animation-delay: 10s; }
+
+    @keyframes swim {
+      from { transform: translateX(0); }
+      to { transform: translateX(120vw); }
+    }
+
+    /* Contador regresivo */
+    #countdown {
+      font-size: 2em;
+      color: #ffffff;
+      text-shadow: 2px 2px 5px #000;
+      text-align: center;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fondo con burbujas -->
+  <div class="bubble" style="width:40px; height:40px; left:10%; animation-duration:12s;"></div>
+  <div class="bubble" style="width:25px; height:25px; left:30%; animation-duration:8s;"></div>
+  <div class="bubble" style="width:50px; height:50px; left:70%; animation-duration:15s;"></div>
+  <div class="bubble" style="width:20px; height:20px; left:80%; animation-duration:10s;"></div>
+
+  <!-- Baby Shark nadando -->
+  <img src="https://www.freeiconspng.com/uploads/high-resolution-baby-shark-png-clipart-16.png" class="shark shark1" alt="Baby Shark 1">
+  <img src="https://www.freeiconspng.com/uploads/baby-shark-png-hd-9.png" class="shark shark2" alt="Baby Shark 2">
+  <img src="https://www.freeiconspng.com/uploads/high-resolution-baby-shark-png-icon-11.png" class="shark shark3" alt="Baby Shark 3">
+
+  <!-- Contador regresivo -->
+  <div id="countdown"></div>
+
+  <!-- Invitación -->
+  <div class="card">
+    <h1>¡DULCE NAOMI! </h1>
+    <p><strong>Evento:</strong> Mis tres años 🎉</p>
+    <p><strong>Fecha:</strong> 4 de octubre</p>
+
+    <p><strong>Misa:</strong> C. Sabino 802, Huerto Nantzha, 42800 Tula de Allende, Hgo., 13:00 hrs</p>
+    <p><strong>Después de la ceremonia religiosa</strong> los espero en "Casa de mis Abuelitos": 42814 Nantzha, Hgo.</p>
+
+    <!-- Botones de ubicación -->
+    <a href="https://maps.google.com/?q=C.+Sabino+802,+Huerto+Nantzha,+42800+Tula+de+Allende,+Hgo" target="_blank" class="btn">
+      📍 Ver ubicación de la Misa
+    </a>
+    <a href="https://maps.app.goo.gl/ay6Z2vSGK7Dka2nx6" target="_blank" class="btn">
+      🎉 Ver ubicación de la Fiesta
+    </a>
+  </div>
+
+  <!-- Música Baby Shark -->
+  <audio autoplay loop>
+    <source src="https://www.orangefreesounds.com/wp-content/uploads/2022/04/Baby-shark-song.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio en HTML5.
+  </audio>
+
+  <script>
+    // Contador regresivo
+    const countdown = document.getElementById('countdown');
+    const eventDate = new Date("October 4, 2025 13:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        countdown.innerHTML = "¡La fiesta comenzó! 🎉";
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdown.innerHTML = `Faltan ${days}d ${hours}h ${minutes}m ${seconds}s para la fiesta 🦈`;
+    }
+
+    const interval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
+
